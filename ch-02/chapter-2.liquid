@@ -1,0 +1,77 @@
+{% comment %} operator == to allows us to check whether the element we are
+comparing is equal to some value: {% endcomment %}
+{% if collection.title == "Winter Shoes" %}
+    Winter Shows collection found!
+{% endif %}
+{% comment %} the != show the similar, but it is to measure whether it is not equal {% endcomment %}
+{% if collection.title != "Winter Shows" %}
+    Winter Shows collection is not found!
+{% endif %}
+{% comment %} The > operator allows us to check whether the compared value is greater than the comparing value {% endcomment %}
+{% if collection.all_products_countx > 25 %} 
+    The collection has more than 25 products! 
+{% endif %} 
+{% comment %} The < operator is to compared value is lesser than the comparing value. {% endcomment %} 
+{% if collection.all_products_count < 25 %} 
+    The collection has less than 25 products!
+{% endif %} 
+{% comment %} You cannot use the comparison with the different datatype. {% endcomment %}
+
+{% if collection.all_products_count >= 25 %}
+    The collection has more or and exact number of products as the comparing value!
+{% endif %}
+
+{% if collection.all_product_count <= 25 %}
+    The collection has less or an exact number of products as the comparing value!
+{% endif %}
+
+{% comment %} logical opreator or {% endcomment %}
+{% if collection.title == "Winter Shoes" or collection.all_products_count > 25 %}
+    The collection name is Winter Shows, or the collection contains more than 25 products.
+{% endif %}
+
+{% comment %} logical operator and {% endcomment %}
+{% if collection.title == "Winter Shoes" and collection.all_products_count > 25 %}
+    The collection name is Winter Shoes, and the collection contains more than 25 products!
+{% endif %}
+
+{% comment %} the check of comparison will start from the right side. parenthesis is invalid in liquid {% endcomment %}
+
+{% comment %} contains check whether a string contains a substring. contains is case-sensitive. {% endcomment %}
+{% if collection.title contains "Chrismas" %}
+    Our Chrismas collection is stocked and ready to go!
+{% endif %}
+
+{% comment %} we can use contains for search presence of a substring inside a string, or even a string inside an array.
+it can't be used to check the presence of an object inside the array of object. We can only use containts to search for the presence of strings. {% endcomment %}
+
+
+{% comment %} 
+Understand the type of data
+- String
+- Number
+- Boolean
+- Nil
+- Array
+- EmptyDrop
+{% endcomment %}
+
+{% comment %} String {% endcomment %}
+{% if product.title contains "Book" or product.title contains "2021" %}
+    We have found a product that contains the word Book or the product that contains the word 2021.
+{% endif %}
+
+{% comment %} 
+Number
+- float, the number with decimal points
+- int, the whole number.
+ {% endcomment %}
+
+{% if product.price > 25 and product.price < 3500 %}
+    The number of products in a collection is greater than 25 and the product's price is lower than 3500.
+{% endif %}
+
+{% comment %} Boolean {% endcomment %}
+{% if customer.accepts_marketing == true %}
+    The customer has signed up for our neewsletter!
+{% endif %}
