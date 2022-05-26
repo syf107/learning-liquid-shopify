@@ -1,5 +1,4 @@
-{% comment %} operator == to allows us to check whether the element we are
-comparing is equal to some value: {% endcomment %}
+{% comment %} operator == to allows us to check whether the element we are comparing is equal to some value: {% endcomment %}
 {% if collection.title == "Winter Shoes" %}
     Winter Shows collection found!
 {% endif %}
@@ -38,7 +37,7 @@ comparing is equal to some value: {% endcomment %}
 {% comment %} the check of comparison will start from the right side. parenthesis is invalid in liquid {% endcomment %}
 
 {% comment %} contains check whether a string contains a substring. contains is case-sensitive. {% endcomment %}
-{% if collection.title contains "Chrismas" %}
+{% if collection.title contains "Christmas" %}
     Our Chrismas collection is stocked and ready to go!
 {% endif %}
 
@@ -75,3 +74,49 @@ Number
 {% if customer.accepts_marketing == true %}
     The customer has signed up for our neewsletter!
 {% endif %}
+
+{% comment %} Nil {% endcomment %}
+{% if customer %}
+    Welcome {{ customer.name }}
+{% endif %}
+
+
+{% if collection.description %}
+    <h3>{{collection.description}}</h3>
+{% endif %}
+
+{% if collection.description != blank %}
+    <h3>The collection description element will show only if its content is not empty.</h3>
+{% endif %}
+
+
+<p>{{ product.tags[0] }}</p>
+<p>{{ product.tags[1] }}</p>
+<p>{{ product.tags[2] }}</p>
+<p>{{ product.tags[3] }}</p>
+<p>{{ product.tags[4] }}</p>
+
+{% for tag in product.tags %}
+    <p>{{ tag }}</p>
+{% endfor %}
+
+<h1>{{ pages.learning-about-the-page-handle.title }}</h1>
+<h1>{{ pages.["learning-about-the-page-handle"].title}}</h1>
+
+{% if pages["learning=-about-the-page-handle"].title != empty %}
+    <div class="tester">{{ pages["learning-about-the-page-handle"].title }}</div>
+{% endif %}
+
+Collection info:
+
+{% if condition %}
+    The colletion's name is {{ collection.title }} !
+{% endif %}
+
+
+
+Collection info:
+
+{%- if condition -%}
+    The colletion's name is {{ collection.title -}} !
+{%- endif -%}
