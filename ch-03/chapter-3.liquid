@@ -1,0 +1,29 @@
+{% if page.content != blank %}
+  <div class="rte">
+    {{ page.content }}
+  </div>
+{% endif %}
+
+{% if page.content != blank %}
+  <div class="rte">
+    {{ page.content }}
+  </div>
+{% else %}
+  <div class="rte">
+    The page content is currently pending. Please check again shortly.
+  </div>
+{% endif %}
+
+{% if page.content.size > 100 %}
+  <div class="rte">
+    {{ page.content }}
+  </div>
+{% elsif page.content.size < 100 and page.content != blank %}
+  <div class="rte">
+    Our content writers are making the final touches, and the page content will be available shortly.
+  </div>
+{% else %}
+  <div class="rte">
+    The page content is currently pending. Please check again shortly.
+  </div>
+{% endif %}
