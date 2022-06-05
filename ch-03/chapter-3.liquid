@@ -27,3 +27,132 @@
     The page content is currently pending. Please check again shortly.
   </div>
 {% endif %}
+
+{% case page.content.size %}
+  {% when 150 %}
+    The page has only 150 characters, so this should not take much time to read.
+  {% when 350 %}
+    We have bumped the page to 350 characters, but it should not take that much time.
+  {% when 1000 %}
+    We now have 1000 characters written, and it is going to take a few minutes to read everything carefully.
+{% endcase %}
+
+{% unless page.title != "Controlling the flow of Liquid" %}
+  Unless the page title is Controlling the Flow of Liquid, the code inside this conditional will not execute.
+{% endunless %}
+
+{% assign stringVar = 'This is a string!' %}
+{% assign numberVar = 2021 %}
+{% assign booleanVar = true %}
+
+{{ stringVar }}
+{{ numberVar }}
+{{ booleanVar }}
+
+{% if stringVar == "This is a String!" %}
+  The variable content is a string value!
+{% elsif stringVar == 2021 %}
+  The variable content is a number value!
+{% else %}
+  The variable content is a boolean value!
+{% endif %}
+
+{% assign percent = 15 %}
+{% assign deal = "three or more" %}
+
+
+{% capture promoMessage %}
+  if you order {{ deal }} books, you can receive up to a {{ percent }}% discount!
+{% endcapture %}
+
+{{ promoMessage }}
+
+<div class="product-count">
+  <div id="product-item-{% increment counter %}"></div>
+  <div id="product-item-{% increment counter %}"></div>
+  <div id="product-item-{% increment counter %}"></div>
+</div>
+
+{% comment %} the result {% endcomment %}
+<div class="product-count">
+  <div id="product-item-0"></div>
+  <div id="product-item-1"></div>
+  <div id="product-item-2"></div>
+</div>
+
+{% assign numberVar = 7 %}
+
+{% increment numberVar %}
+{% increment numberVar %}
+
+{{ numberVar }}
+
+
+{% decrement numberVar %}
+{% decrement numberVar %}
+{% decrement numberVar %}
+
+{% for product in collection.products %}
+  {{product.title}}
+{% endfor %}
+
+{% for product in collections["outdoor"].products %}
+  {{product.title}}
+{% endfor %}
+
+
+{% for product in collections["outdoor"].products %}
+  {% if product.price > 10000 %}
+    {% continue %}
+  {% else %}
+    {{ product.title }}
+  {% endif %}
+{% endfor %}
+
+
+{% for product in collections["outdoor"].products %}
+  {% if product.price > 10000 %}
+    {% break %}
+  {% else %}
+    {{ product.title }}
+  {% endif %}
+{% endfor %}
+
+
+{% for product in collections["outdoor"].products limit: 4 %}
+  {% if product.price > 10000 %}
+    {% continue %}
+  {% else %}
+    {{ product.title }}
+  {% endif %}
+{% endfor %}
+
+{% for product in collections["outdoor"].products offset: 4 %}
+  {% if product.price > 10000 %}
+    {% continue %}
+  {% else %}
+    {{ product.title }}
+  {% endif %}
+{% endfor %}
+
+{% for product in collections["outdoor"].products offset: 4 limit: 1 %}
+  {% if product.price > 10000 %}
+    {% continue %}
+  {% else %}
+    {{ product.title }}
+  {% endif %}
+{% endfor %}
+
+{% for item in (3..5) %}
+  {{ item }}
+{% endfor %}
+
+{% assign start = 3 %}
+
+{% for item in (start..collections["outdoor"].all_products_count) %}
+  {{ item }}
+{% endfor %}
+
+{% for item in (3..5) reversed %}
+  {{ item }}
+{% endfor %}
