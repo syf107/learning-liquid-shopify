@@ -156,3 +156,115 @@
 {% for item in (3..5) reversed %}
   {{ item }}
 {% endfor %}
+
+
+{% for product in collection.products limit: 4 %}
+  <div class="product-item {% cycle "first", "", "", "last" %}"></div>
+{% endfor %}
+
+{% for product in collection.products limit: 9 %}
+  <div class="product-item {% cycle "first", "", "", "last" %}"></div>
+{% endfor %}
+
+{% for product in collection.products limit: 6 %}
+  <div class="product-item {% cycle "first", "", "", "last" %}"></div>
+{% endfor %}
+
+{% for product in collection.products limit: 4 %}
+  <div class="product-item {% cycle "first", "", "", "last" %}"></div>
+{% endfor %}
+
+
+
+{% for product in collection.products limit: 6 %}
+  <div class="product-item {% cycle "group1": "first", "", "", "last" %}"></div>
+{% endfor %}
+
+{% for product in collection.products limit: 4 %}
+  <div class="product-item {% cycle "group2": "first", "", "", "last" %}"></div>
+{% endfor %}
+
+{% layout "theme.alternate" %}
+
+{% for item in collections["outdoor"].products offset: 4 %}
+  {% if product.price > 10000 %}
+    {% continue %}
+  {% else %}
+    {{ product.title }}
+  {% endif %}
+{% endfor %}
+
+{% liquid
+for product in collections["outdoor"].products offset: 4
+  if product.price > 10000
+    continue
+  else
+    echo product.title
+  endif
+endfor %}
+
+
+{% form "product", product %}
+{% endform %}
+
+
+{% for product in collections["outdoor"].products offset: 4 %}
+  {% if product.price > 10000 %}
+    {% continue %}
+  {% else %}
+    {% form "product", product %}
+      {{ product.title }}
+    {% endform %}
+  {% endif %}
+{% endfor %}
+
+{% for product in collections["outdoor"].products offset: 4 %}
+  {% if product.price > 10000 %}
+    {% continue %}
+  {% else %}
+    {% capture productId %}prouctId-{% increment counter %}{% endcapture %}
+    {% form "product", product, id: productId, data-location: "collection" %}
+      {{ product.title }}
+    {% endform %}
+  {% endif %}
+{% endfor %}
+
+{% form "product", return_to: "back" %}
+{% endform %}
+
+{% paginate collection.products by 5 %}
+  {% for product in collection.products %}
+
+  {% endfor %}
+{% endpaginate %}
+
+{% render "snippet-name" %}
+
+{% for product in collections["outdoor"].products offset: 4 %}
+  {% if product.price > 10000 %}
+    {% continue %}
+  {% else %}
+    {% render "collection-form", product: product  %}
+  {% endif %}
+{% endfor %}
+
+{% render 'snippet-file' with collections["collection-handle"] as featured_collection %}
+
+{% if condition %}
+
+{% endif %}
+
+{% if product.price > 10000 %}
+  {% continue %}
+{% else %}
+  {% form "product", product, data-location: "collection" %}
+	  {{ product.title }}
+  {% endform %}
+{% endif %}
+
+{% render 'collection-form' for collections["outdoor"].products as product %}
+
+
+{% raw %}
+  The name of our collection is {{ collection.title }}
+{% endraw %}
