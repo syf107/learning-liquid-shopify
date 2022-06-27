@@ -1,0 +1,54 @@
+/* featured collection */
+
+.featured-collection--container * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.featured-collection--container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.featured-collection {
+  border: 1px solid #333;
+  padding: 10px 15px;
+}
+
+.featured-collection--title {
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.featured-collection--vendor {
+  font-size: 14px;
+  font-weight: lighter;
+  color: #555;
+}
+
+.featured-collection--price {
+  font-size: 16px;
+}
+
+.featured-collection--price-regular {
+  color: red;
+  padding-right: 5px;
+}
+
+.featured-collection--price-compare {
+  text-decoration: line-through;
+}
+
+.featured-collection--submit {
+  padding: 5px 10px;
+}
+
+.featured-collection--submit:hover,
+.featured-collection--submit:active {
+  color: #fff;
+  background-color: #444;
+}

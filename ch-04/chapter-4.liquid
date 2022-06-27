@@ -1,0 +1,72 @@
+{{ collection.title }}
+
+{% assign customCollection = collections["indoor"].title %}
+{% assign customCollection = collections.indoor.title %}
+
+{{ customCollection.title }}
+
+{% render 'collection-form' for collections["outdoor"].products as product %}
+
+{% if product.price > 10000 %}
+    {% continue %}
+{% else %}
+    {% form "product", product, data-location: "collection" %}
+        {{ product.title }}
+    {% endform %}
+{% endif %}
+
+{% if product.compare_at_price != blank %}
+    <a href="{{ product.url }}">
+        <img src="{{ product | img_url }}"/>
+        <p>{{ product.title }}</p>
+        <p>{{ product.price | money }}<span>{{ product.compare_at_price | money }}</span>
+        </p>
+        <span>sale</span>
+    </a>
+    {% form "product", product %}
+        <input type="hidden" name="id" value="{{ product.first_available_variant.id }}" type="submit" value="Add to Cart"/>
+        <input type="submit" value="Add to Cart"/>
+    {% endform %}
+{% endif %}
+
+{% assign collection-menu = linklists.indoor-navigation %}
+{{ collection-menu.title }}
+-
+{{ collection-menu.levels }}
+
+{% assign collection-menu = linklists.indoor-navigation %}
+{% for link in collection-menu.links %}
+    {{ link.title }}
+    {% for sub_link in link.links %}
+        {{ sub_link.title }}
+        {% for sub_sub_link in sub_link.links %}
+            {% if sub_sub_link.type == "product_link" %}
+                <img src="{{ sub_sub_link | img_url: "250x250" }}"/>
+            {% endif %}
+            {{ sub_sub_link.title }}
+        {% endfor %}
+    {% endfor %}
+{% endfor %}
+
+<input name="properties[_Your Name]" placeholder="Your name" type="text"/>
+
+{% for item in cart.items %}{% endfor %}
+{% for property in item.properties %}
+    {% assign first_character_in_key = p.first | truncate: 1, '' %}
+    {% unless first_character_in_key == '_' %}
+    <span>{{ property.first }}</span>:<span>{{ property.last }}</span>
+{% endfor %}
+
+{% for value in product.metafields.global %}
+    {{ value | first }} : {{ value | last}}
+{% endfor %}
+
+{{ content_for_header }}
+
+{{ content_for_index }}
+
+{{ content_for_layout }}
+
+{% if additional_checkout_buttons %}
+    {{ content_for_additional_checkout_buttons }}
+{% endif %}

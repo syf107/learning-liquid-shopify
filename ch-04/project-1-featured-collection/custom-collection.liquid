@@ -1,0 +1,25 @@
+<div class="featured-collection--container">
+    {% for product in collection_object.products limit: 4 %}
+        <div class="featured-collection">
+            <img src="{{ product | img_url: "300x300" }}">
+            <p class="featured-collection--title">{{ product.title }}</p>
+            <p class="featured-collection--vendor">{{ product.vendor }}</p>
+            <p class="featured-collection--price">
+                <span class="featured-collection--price-regular">{{ product.price | money }}</span>
+                <span class="featured-collection--price-compare">{{ product.compare_at_price | money }}</span>
+            </p>
+            {% form "product", product, class: "featured-collection--form", return_to: "back" %}
+                {% if product.has_only_default_variant %}
+                    <input type="hidden" name="id" value="{{ product.first_available_variant.id }}"/>
+                {% else %}
+                    <select class="featured-collection--variant-selector">
+                        {% for variant in product.variants %}
+                            <option value="{{ variant.id }}">{{ variant.title }}</option>
+                        {% endfor %}
+                    </select>
+                {% endif %}
+                <input class="featured-collection--submit" type="submit" value="Add to Cart">
+            {% endform %}
+        </div>
+    {% endfor %}
+</div>
