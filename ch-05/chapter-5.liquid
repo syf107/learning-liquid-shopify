@@ -1,0 +1,108 @@
+{{ "theme.css" | asset_url }}
+
+<link rel="stylesheet" href="{{ "theme.css" | asset_url }}">
+
+{{ "theme.css" | asset_url | stylesheet_tag }}
+
+{{ "theme.js" | asset_url | script_tag }}
+
+
+{{ "ajax-loader.gif" | asset_url | img_tag }}
+
+<img src="{{ product | img_url: "300x300"}}"/>
+
+{% assign product_object = all_products["gardening-gloves"] %}
+{% for image_item in product_object.images %}
+    <img src="{{ image_item | img_url: "300x300", crop: "center", format: "pjpg" }}"/>
+{% endfor %}
+
+{% assign product_object = all_products["gardening-gloves"] %}
+{% for image_item in product_object.images %}
+    {{ image_item | img_tag: image_item.alt, "class1 class2", "300x300" }}
+{% endfor %}
+
+{{ "ajax-loader.gif" | asset_img_url: "300x300", scale: 2, crop: "center" }}
+
+{% assign product_object = all_products["gardening-gloves"] %}
+{% for media in product_object.media %}
+    {% case media.media_type %}
+        {% when "image" %}
+            {{ media | img_tag: media.alt, "class1 class2", "300x300" }}
+        {% when "external_video" %}
+            {% if media.host == "youtube" %}
+                {{ media | external_video_url: controls: 0, color: "white" | external_video_tag }}
+            {% else %}
+                {{ media | external_video_url: loop: 1, muted: 1 | external_video_tag }}
+            {% endif %}
+        {% when "video" %}
+            {{ media | video_tag: controls: true, image_size: "300x300", width: "300x" }}
+        {% when "model" %}
+            {{ media | model_viewer_tag }}
+        {% else %}
+            {{ media | media_tag }}
+    {% endcase %}
+{% endfor %}
+
+{% assign methods = "Strings and Filters" | split: ' and '  | first %}
+
+{{ methods }}
+
+{% assign message = "This is a short string message." |split: " " %}
+{% for item in message %}
+    {{ item }}
+{% endfor %}
+
+<div class="product-single__description rte">
+    {% assign productDescription = product.description | split: "<h6>" %}
+
+    {% if productDescription.size > 1 %}
+        {% for item in productDescription offset: 1 %}
+            <div class="product-single__description-item">
+                <div class="product-single__description-title">
+                    {{ item | split: "</h6>" | first }}
+                </div>
+                <div class="product-single__description-content">
+                    {{ item | split: "</h6>" | last }}
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="rte">{{ product.description }}</div>
+    {% endif %}
+
+</div>
+
+{% assign message = "This is a short string message." %}
+
+{{ message | size }}
+
+{% if message.size >= 10 %}
+    This message contains more than 10 characters.
+{% endif %}
+
+
+<div class="product-single__description rte">
+    {% assign productDescription = product.description | split: "<h6>" %}
+
+    <div class="product-single__description-item">
+        <div class="product-single__description-title">
+            {{ item[1] | split: "</h6>" | first }}
+        </div>
+        <div class="product-single__description-content">
+            {{ item[1] | split: "</h6>" | last }}
+        </div>
+    </div>
+</div>
+
+<div class="product-single__description rte">
+    {% assign productDescription = product.description |
+    split: "<h6>" %}
+    <div class="product-single__description--item">
+        <div class="product-single__description-title">
+            {{ item[1] | split: "</h6>" | first }}
+        </div>
+        <div class="product-single__description-content">
+            {{ item[1] | split: "</h6>" | last }}
+        </div>
+    </div>
+</div>

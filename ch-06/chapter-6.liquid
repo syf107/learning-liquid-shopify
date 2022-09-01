@@ -1,0 +1,233 @@
+{
+   "name": "Category",
+  "settings": [
+    {
+        "type": "color",
+        "id": "store_background_color",
+        "label": "Background Color",
+        "default": "#ffffff"
+
+    },
+    {
+        "type": "color",
+        "id": "store_border_color",
+        "label": "Border Color",
+        "default": "#cccccc"
+    }
+
+  ]
+}
+
+{
+ "type": "checkbox",
+ "id": "enable_popup",
+ "label": "Enable popup",
+ "default": true
+}
+
+{% if settings.enable_popup == true %}
+{% endif %}
+
+{
+  "type": "number",
+  "id": "number_of_products",
+  "label": "Number of products",
+  "placeholder": "24"
+}
+
+{{ settings.number_of_products }}
+
+
+{
+  "type": "radio",
+  "id": "heading_alignment",
+  "label", "Heading alignment",
+  "options": [
+  {
+    "value", "left",
+    "label": "Left"
+  },
+  {
+    "value": "center",
+    "label": "Center"
+  },
+  {
+    "value": "right",
+    "label": "Right"
+  }
+  ],
+  "default": center
+}
+
+.heading {
+  text-align: {{ settings.heading_alignment }};
+}
+
+{
+  "type": "range",
+  "id": "logo_size",
+  "min": 120,
+  "max": 220,
+  "step": 1,
+  "unit": "px",
+  "label": "Logo Size",
+  "default": 140
+}
+
+.logo-img {
+  max-width: {{ settings.logo_size }}px;
+}
+
+{
+ "type": "select",
+ "id": "font_family",
+ "label": "Font Family",
+ "options": [
+  {
+    "value": "raleway-light",
+    "label": "Raleway - Light",
+    "group": "Raleway"
+  },
+  {
+    "value": "raleway-regular",
+    "label": "Raleway - Regular",
+    "group": "Raleway"
+  },
+  {
+    "value": "playfair-display-regular",
+    "label": "Playfair Display - Regular",
+    "group": "Playfair Display"
+  }
+ ],
+ "default": "playfair-display-regular"
+}
+
+.heading {
+  font-family: {{ settings.font_family }};
+}
+
+
+{
+  "type": "text",
+  "id": "header_announcemenet",
+  "label": "Header Announcemenet",
+  "placeholder": "Enter a short announcement.",
+  "default": "Spend more than 100% to qualify for a 10% discount!"
+}
+
+{{ settings.header_announcement }}
+
+{
+  "type": "textarea",
+  "id": "header_announcement_textarea",
+  "label": "Header Announcement",
+  "placeholder": "Enter a short announcement.",
+  "default": "Spend more than 100% to qualify for a 10% discount!"
+}
+
+{
+  "type": "richtext",
+  "id": "header_announcement_richtext",
+  "label": "Header Announcement",
+  "default": "<p>Spend more than 100% to qualify for a 10% discount.</p>"
+}
+
+{
+  "type": "html",
+  "id": "google_analytics",
+  "label": "Google Analytics",
+  "placeholder": "Paste the Google Analytics code here."
+},
+
+{
+  "type": "link_list",
+  "id": "header-menu",
+  "label": "Header Menu",
+  "default": "main-menu"
+},
+
+{
+  "type": "liquid",
+  "id": "liquid_block",
+  "label": "Liquid block"
+}
+
+{
+  "type": "color",
+  "id": "store_background_color",
+  "label": "Store Background Color",
+  "default": "#ffffff",
+},
+
+body {
+  backgorund-color: {{ settings.store_background_color }}
+}
+
+{
+  "type": "url",
+  "id": "banner_link",
+  "label": "Banner Link",
+  "default": "/collections"
+},
+
+<a href="{{ settings.banner_link }}"></a>
+
+{
+  "type": "video_url",
+  "id": "banner_video_url",
+  "accept": [
+    "youtube",
+    "vimeo"
+  ],
+  "label": "Video URL",
+  "placeholder": "Enter the Youtube or Vimeo video URL."
+},
+
+{
+  "type": "image_picker",
+  "id": "banner_image",
+  "label": "Banner image"
+}
+
+<img src="{{ settings.banner_image | img_url: "600x600"}}" alt="{{ settings.banner_image.alt}}" />
+
+{{ settings.banner_image | img_tag: image_item.alt, "class 1 class2", "600x600"  }}
+
+{
+  "type": "font_picker",
+  "id": "body_font",
+  "label": "Body font",
+  "default": "helvetica_n4"
+}
+
+<style>
+  {{ settings.body_font | font_face}}
+</style>
+
+<style>
+  {% assign body_font = settings.body_font %}
+  {{ body_font | font_face }}
+
+  {% assign body_font_bold = body_font | font_modify: "weight", "bolder" %}
+  {% assign body_font_italic = body_font | font_modify: "style", "italic" %}
+  {% assign body_font_bold_italic = body_font_bold | font_modify: "style", "italic" %}
+
+  {{ body_font_bold | font_face }}
+  {{ body_font_italic | font_face }}
+  {{ body_font_bold_italic | font_face }}
+
+  .body_bold {
+    font-family: "{{ body_font_bold.family }}", "{{ body_font_bold.fallback_families}}";
+    font-style: "{{ body_font_bold.style }}";
+    font-weight: "{{ body_font_bold.weight }}";
+  }
+
+  .body_italic {
+    font-family: "{{ body_font_italic.family }}", "{{ body_font_bold.fallback_families}}";
+    font-style: "{{ body_font_italic.style }}";
+    font-weight: "{{ body_font_italic.weight }}";
+  }
+
+
+
+</style>
